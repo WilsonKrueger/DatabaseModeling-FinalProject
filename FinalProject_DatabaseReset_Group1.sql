@@ -18,12 +18,12 @@
 -- DROP all tables from previous uses of Clinic Database if they are stored
 IF OBJECT_ID ('list')			IS NOT NULL		DROP TABLE list;
 IF OBJECT_ID ('phys_skill')		IS NOT NULL		DROP TABLE phys_skill;
-IF OBJECT_ID ('appointment')	IS NOT NULL     DROP TABLE appointment;
-IF OBJECT_ID ('prescription')	IS NOT NULL     DROP TABLE prescription;
-IF OBJECT_ID ('physician')		IS NOT NULL     DROP TABLE physician;
-IF OBJECT_ID ('skill')			IS NOT NULL     DROP TABLE skill;
-IF OBJECT_ID ('clinic')			IS NOT NULL     DROP TABLE clinic;
-IF OBJECT_ID ('patient')		IS NOT NULL     DROP TABLE patient;
+IF OBJECT_ID ('appointment')		IS NOT NULL    	 	DROP TABLE appointment;
+IF OBJECT_ID ('prescription')		IS NOT NULL     	DROP TABLE prescription;
+IF OBJECT_ID ('physician')		IS NOT NULL     	DROP TABLE physician;
+IF OBJECT_ID ('skill')			IS NOT NULL     	DROP TABLE skill;
+IF OBJECT_ID ('clinic')			IS NOT NULL     	DROP TABLE clinic;
+IF OBJECT_ID ('patient')		IS NOT NULL     	DROP TABLE patient;
 
 -- Create the patient table
 CREATE TABLE patient (
@@ -40,38 +40,38 @@ CREATE TABLE patient (
 	pat_phone			CHAR(12),
 	pat_email			VARCHAR(30),
 	pat_status			CHAR(1)			NOT NULL,
-	pat_created_by		VARCHAR(30)		NOT NULL,
-	pat_created_on		DATETIME		NOT NULL,
-	pat_modified_by		VARCHAR(30),
-	pat_modified_on		DATETIME,
+	pat_created_by			VARCHAR(30)		NOT NULL,
+	pat_created_on			DATETIME		NOT NULL,
+	pat_modified_by			VARCHAR(30),
+	pat_modified_on			DATETIME,
 PRIMARY KEY(pat_id));
 
 -- Create the clinic table
 CREATE TABLE clinic (
-	clinic_num          VARCHAR(10)     NOT NULL    UNIQUE,
-	clinic_name         VARCHAR(60)		NOT NULL,
-	clinic_street       VARCHAR(40)		NOT NULL,
-	clinic_city		    VARCHAR(20)		NOT NULL,
-	clinic_state        CHAR(2)			NOT NULL,
-	clinic_zip          CHAR(5)			NOT NULL,
-	clinic_dt_of_op     VARCHAR(10),
-	clinic_stime		TIME(0),
-	clinic_etime		TIME(0),
-	clinic_phone		CHAR(12),
+	clinic_num          		VARCHAR(10)    	 	NOT NULL    UNIQUE,
+	clinic_name         		VARCHAR(60)		NOT NULL,
+	clinic_street       		VARCHAR(40)		NOT NULL,
+	clinic_city		    	VARCHAR(20)		NOT NULL,
+	clinic_state        		CHAR(2)			NOT NULL,
+	clinic_zip          		CHAR(5)			NOT NULL,
+	clinic_dt_of_op     		VARCHAR(10),
+	clinic_stime			TIME(0),
+	clinic_etime			TIME(0),
+	clinic_phone			CHAR(12),
 PRIMARY KEY(clinic_num));
 
 -- Create the skill table
 CREATE TABLE skill (
-	skill_id	        VARCHAR(10)     NOT NULL    UNIQUE,
+	skill_id	        	VARCHAR(10)     	NOT NULL    UNIQUE,
 	skill_name			VARCHAR(20)		NOT NULL,
-	skill_descript      VARCHAR(45),
+	skill_descript      		VARCHAR(45),
 PRIMARY KEY(skill_id));
 
 -- Create the physician table
 CREATE TABLE physician (
-	phys_id				VARCHAR(10)     NOT NULL    UNIQUE,
+	phys_id				VARCHAR(10)     	NOT NULL    UNIQUE,
 	clinic_num			VARCHAR(10)		NOT NULL,
-	phys_license		CHAR(2)			NOT NULL,
+	phys_license			CHAR(2)			NOT NULL,
 	phys_fname			VARCHAR(30)		NOT NULL,
 	phys_lname			VARCHAR(30)		NOT NULL,
 	phys_stime			TIME(0),
@@ -85,14 +85,14 @@ CREATE TABLE prescription (
 	presc_num			VARCHAR(10)		NOT NULL    UNIQUE,
 	pat_id				VARCHAR(10)		NOT NULL,
 	phys_id				VARCHAR(10)		NOT NULL,
-	presc_generic		VARCHAR(20)		NOT NULL,
+	presc_generic			VARCHAR(20)		NOT NULL,
 	presc_brand			VARCHAR(20),
 	presc_usage			VARCHAR(40)		NOT NULL,
-	presc_dosage		VARCHAR(15),
+	presc_dosage			VARCHAR(15),
 	presc_start			DATE			NOT NULL,
-	presc_status		CHAR(1)			NOT NULL,
+	presc_status			CHAR(1)			NOT NULL,
 PRIMARY KEY(presc_num),
-FOREIGN KEY(pat_id)		REFERENCES patient,
+FOREIGN KEY(pat_id)	REFERENCES patient,
 FOREIGN KEY(phys_id)	REFERENCES physician);
 
 -- Create the appointment table
@@ -101,11 +101,11 @@ CREATE TABLE appointment (
 	pat_id				VARCHAR(10)		NOT NULL,
 	phys_id				VARCHAR(10)		NOT NULL,
 	app_type			VARCHAR(30)		NOT NULL,
-	app_descript		VARCHAR(50),
+	app_descript			VARCHAR(50),
 	app_stime			DATETIME		NOT NULL,
 	app_etime			DATETIME,
 PRIMARY KEY(app_num),
-FOREIGN KEY(pat_id)		REFERENCES patient,
+FOREIGN KEY(pat_id)	REFERENCES patient,
 FOREIGN KEY(phys_id)    REFERENCES physician);
 
 -- Create the phys_skill table
@@ -118,11 +118,11 @@ FOREIGN KEY(skill_id)   REFERENCES skill);
 
 -- Create the list table
 CREATE TABLE list (
-	list_id			VARCHAR(10)		NOT NULL    UNIQUE,
-	list_name       VARCHAR(15)		NOT NULL,
-	list_display    VARCHAR(50),
-	list_value      VARCHAR(50),
-	list_status     CHAR(1)			NOT NULL,
+	list_id				VARCHAR(10)		NOT NULL    UNIQUE,
+	list_name       		VARCHAR(15)		NOT NULL,
+	list_display    		VARCHAR(50),
+	list_value      		VARCHAR(50),
+	list_status     		CHAR(1)			NOT NULL,
 PRIMARY KEY(list_id));
 
 -- Create patient records
